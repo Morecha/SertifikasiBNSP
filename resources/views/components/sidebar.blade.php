@@ -3,12 +3,12 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset((setting('logo')) ? '/storage/'.setting('logo') : 'dist/img/logo/logo2.png') }}">
         </div>
-        <div class="sidebar-brand-text mx-3">RuangAdmin</div>
+        <div class="sidebar-brand-text mx-3">Motor Club</div>
     </a>
     <hr class="sidebar-divider my-0">
 
     <x-nav-link
-        text="Dashboard"
+        text="Home"
         icon="tachometer-alt"
         url="{{ route('admin.dashboard') }}"
         active="{{ request()->routeIs('admin.dashboard') ? ' active' : '' }}"
@@ -16,21 +16,19 @@
 
     <hr class="sidebar-divider mb-0">
 
-    @can('artikel')
     <x-nav-link
         text="Artikel"
         icon="arrow-right"
-        url="{{ route('admin.member') }}"
-        active="{{ request()->routeIs('admin.member') ? ' active' : '' }}"
+        url="{{ route('admin.artikel') }}"
+        active="{{ request()->routeIs('admin.artikel') ? ' active' : '' }}"
     />
-    @endcan
 
     @can('event')
     <x-nav-link
         text="Event"
         icon="flag"
-        url="{{ route('admin.member') }}"
-        active="{{ request()->routeIs('admin.member') ? ' active' : '' }}"
+        url="{{ route('admin.event') }}"
+        active="{{ request()->routeIs('admin.event') ? ' active' : '' }}"
     />
     @endcan
 
@@ -38,8 +36,8 @@
     <x-nav-link
         text="Galery Foto"
         icon="palette"
-        url="{{ route('admin.member') }}"
-        active="{{ request()->routeIs('admin.member') ? ' active' : '' }}"
+        url="{{ route('admin.galery') }}"
+        active="{{ request()->routeIs('admin.galery') ? ' active' : '' }}"
     />
     @endcan
 
@@ -47,8 +45,8 @@
     <x-nav-link
         text="Klien Kami"
         icon="users"
-        url="{{ route('admin.member') }}"
-        active="{{ request()->routeIs('admin.member') ? ' active' : '' }}"
+        url="{{ route('admin.klien') }}"
+        active="{{ request()->routeIs('admin.klien') ? ' active' : '' }}"
     />
     @endcan
 

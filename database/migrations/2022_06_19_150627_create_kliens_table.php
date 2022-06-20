@@ -15,6 +15,11 @@ class CreateKliensTable extends Migration
     {
         Schema::create('kliens', function (Blueprint $table) {
             $table->id();
+            $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('kendaraan')->nullable();
+            $table->date('tanggal')->nullable();
             $table->timestamps();
         });
     }

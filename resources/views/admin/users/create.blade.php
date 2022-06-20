@@ -1,12 +1,9 @@
 <x-app-layout>
 	<x-slot name="title">New User</x-slot>
-	
+
 	{{-- show alert if there is errors --}}
 	<x-alert-error/>
 
-	@if(session()->has('success'))
-	<x-alert type="success" message="{{ session()->get('success') }}" />
-	@endif
 	<x-card>
 		<form action="{{ route('admin.member.create') }}" method="post">
 			@csrf
@@ -37,7 +34,7 @@
 			</div>
 
 			<x-button type="primary" text="Submit" for="submit" />
-			
+
 		</form>
 	</x-card>
 </x-app-layout>

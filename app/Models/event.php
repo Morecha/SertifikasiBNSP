@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class event extends Model
 {
     use HasFactory;
+    protected $table = 'events';
+    protected static $ignoreChangedAttributes = ['update_at'];
+    protected $fillable = [
+        'id',
+        'judul',
+        'text',
+        'gambar',
+        'waktu'
+    ];
 }

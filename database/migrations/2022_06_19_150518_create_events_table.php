@@ -15,6 +15,10 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string('judul')->nullable();
+            $table->longText('text')->nullable();
+            $table->text('gambar')->nullable();
+            $table->date('waktu')->nullable();
             $table->timestamps();
         });
     }

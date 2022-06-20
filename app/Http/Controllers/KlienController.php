@@ -14,7 +14,7 @@ class KlienController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.klien.index');
     }
 
     /**

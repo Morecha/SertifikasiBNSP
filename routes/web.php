@@ -19,6 +19,7 @@ Route::group([
 
     // Artikel
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+    Route::get('/artikel/{id}/show', [ArtikelController::class, 'show'])->name('artikel.show');
 	Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('artikel.create');
 	Route::post('/artikel/create', [ArtikelController::class, 'store'])->name('artikel.create');
 	Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');

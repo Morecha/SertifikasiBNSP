@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\artikel;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class ArtikelController extends Controller
 {
+    function __construct()
+    {
+        // create, store, edit, update, destroy
+        $this->middleware('permission:artikel', ['only' => ['create','store','edit','update','destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        //
+        $isi = artikel::all();
+
+        return view('admin.artikel.index', compact('isi'));
     }
 
     /**
@@ -24,7 +34,7 @@ class ArtikelController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.artikel.create');
     }
 
     /**
@@ -35,7 +45,16 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'text' => 'required'
+        ]);
+
+        $input = $request->all();
+        artikel::create($input);
+
+        return redirect('admin/artikel');
     }
 
     /**
@@ -44,9 +63,10 @@ class ArtikelController extends Controller
      * @param  \App\Models\artikel  $artikel
      * @return \Illuminate\Http\Response
      */
-    public function show(artikel $artikel)
+    public function show($id)
     {
-        //
+        $show = artikel::find($id);
+        return view('admin.artikel.show', compact('show'));
     }
 
     /**
@@ -55,9 +75,10 @@ class ArtikelController extends Controller
      * @param  \App\Models\artikel  $artikel
      * @return \Illuminate\Http\Response
      */
-    public function edit(artikel $artikel)
+    public function edit($id)
     {
-        //
+        $edit = artikel::find($id);
+        return view('admin.artikel.edit', compact('edit'));
     }
 
     /**
@@ -67,9 +88,20 @@ class ArtikelController extends Controller
      * @param  \App\Models\artikel  $artikel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, artikel $artikel)
+    public function update(Request $request, artikel $artikel, $id)
     {
-        //
+        $this->validate($request, [
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'text' => 'required'
+        ]);
+
+        $update = artikel::find($id);
+        $input = $request->all();
+
+        $update->fill($input)->save();
+
+        return redirect('admin/artikel');
     }
 
     /**
@@ -78,8 +110,9 @@ class ArtikelController extends Controller
      * @param  \App\Models\artikel  $artikel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(artikel $artikel)
+    public function destroy(artikel $artikel, $id)
     {
-        //
+        artikel::find($id)->delete();
+        return redirect('admin/artikel');
     }
 }

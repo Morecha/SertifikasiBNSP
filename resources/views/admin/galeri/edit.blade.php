@@ -1,25 +1,26 @@
 <x-app-layout>
-	<x-slot name="title">Edit Role</x-slot>
-		<div class="row">
-			<div class="col-md-6">
-				<x-alert-error/>
-				<x-card>
-					<form action="{{ route('admin.roles.update', $role->id) }}" method="post">
-						@csrf
+	<x-slot name="title">New Article</x-slot>
 
-						<x-input type="text" text="Name" name="name" value="{{ $role->name }}" />
+	{{-- show alert if there is errors --}}
+	<x-alert-error/>
 
-							@foreach($permission as $value)
-							<label class="mr-2">
-								<input type="checkbox" value="{{ $value->id }}" name="permission[]" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }} /> {{ $value->name }}
-							</label>
-							
-							@endforeach
-						<div class="mt-3">
-							<x-button type="primary" for="submit" text="Submit" />
-						</div>
-					</form>
-				</x-card>
+	<x-card>
+		<form action="{{route('admin.galery.update', $edit->id)}}" method="post" enctype="multipart/form-data">
+			@csrf
+			<div class="row">
+                <div class="col-sm-6">
+                    <x-input type="file" text="Pictures" name="gambar" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="putanginamo">Description</label>
+                        <textarea class="form-control" id="putanginamo" rows="4" name="deskripsi">{{$edit->deskripsi}}</textarea>
+				    </div>
+                </div>
 			</div>
-		</div>
+			<x-button type="primary" text="Submit" for="submit" />
+		</form>
+	</x-card>
 </x-app-layout>
